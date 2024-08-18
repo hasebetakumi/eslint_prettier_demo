@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  commands:
+    nest:
+      root: nest/
+      glob: '*.{js,ts}'
+      run: npx eslint --fix --max-warnings=0 {staged_files} && npx prettier --write {staged_files}
+      stage_fixed: true
+    next:
+      root: next/
+      glob: '*.{js,jsx,ts,tsx}'
+      run: npx eslint --fix --max-warnings=0 {staged_files} && npx prettier --write {staged_files}
+      stage_fixed: true
