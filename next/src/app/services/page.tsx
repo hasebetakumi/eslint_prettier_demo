@@ -27,6 +27,13 @@ export default function Services() {
         <input name="age" type="text" />
         <button>Submit</button>
       </form>
+      <h1>updateService 竹澤さんの方法</h1>
+      <p>https://the2g.com/post/how-to-pass-additional-parameters-to-server-actions</p>
+      <form action={async (formData) => await updateService(1, formData)}>
+        <input name="name" type="text" />
+        <input name="age" type="text" />
+        <button>Submit</button>
+      </form>
       <h1>createServiceReturnData</h1>
       <form action={dispatch}>
         <input name="name" type="text" />
