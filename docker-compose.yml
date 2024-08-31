@@ -22,3 +22,37 @@ services:
       - WATCHPACK_POLLING=true
     ports:
       - "3001:3000"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.2
+    hostname: keycloak
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keycloak/data:/opt/keycloak/data
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: db_admin
+      TZ: Asia/Tokyo
+    command: start-dev
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16.4
+    hostname: postgres
+    restart: unless-stopped
+    shm_size: 128mb
+    expose:
+      - 5432
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: db_admin
