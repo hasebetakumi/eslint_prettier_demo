@@ -21,4 +21,4 @@ services:
     environment:
       - WATCHPACK_POLLING=true
     ports:
-      - "3001:4000"
+      - "3001:3000"
